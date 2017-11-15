@@ -31,9 +31,6 @@ RUN apt-get -qq update && apt-get -y --force-yes install \
         libzmq3-dev \
         pkg-config \
         python-dev \
-        python-pip \
-        python-numpy \
-        python-scipy \
         libhdf5-serial-dev \
     && \
         apt-get clean && \
@@ -49,10 +46,15 @@ ENV PYTHONPATH      "$ROOTSYS/lib:PYTHONPATH"
 ADD https://root.cern.ch/download/root_v6.10.08.Linux-ubuntu16-x86_64-gcc5.4.tar.gz /var/tmp/root.tar.gz
 RUN tar xzf /var/tmp/root.tar.gz -C /opt && rm /var/tmp/root.tar.gz
 
+# get a non apt managed pip
+RUN curl -s https://bootstrap.pypa.io/get-pip.py | python -
+RUN pip install --upgrade pip
+
 # Build pip deps
 RUN pip install --no-cache-dir \
         keras[h5py] \
         tensorflow \
+        scipy \
         root-numpy \
         rootpy \
         tqdm \
