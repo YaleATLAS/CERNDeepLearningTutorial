@@ -56,7 +56,7 @@ RUN pip install --no-cache-dir \
         rootpy \
         tqdm \
         deepdish \
-        ipython<6 \
+        "ipython<6" \
         notebook==5.2.1 \
         matplotlib \
         scikit-learn \
