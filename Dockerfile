@@ -57,7 +57,7 @@ RUN pip install --no-cache-dir \
         tqdm \
         deepdish \
         jupyter \
-        notebook==5* \
+        notebook==5.2.1 \
         matplotlib \
         scikit-learn \
         pandas
