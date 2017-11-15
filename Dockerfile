@@ -59,7 +59,9 @@ RUN pip install --no-cache-dir \
         deepdish \
         "ipython<6" \
         notebook==5.2.1 \
-        matplotlib \
+        matplotlib
+
+RUN pip install --no-cache-dir \
         scikit-learn \
         pandas
 
