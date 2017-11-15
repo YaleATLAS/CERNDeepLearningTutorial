@@ -43,9 +43,10 @@ RUN apt-get -qq update && apt-get -y --force-yes install \
 ENV ROOTSYS         "/opt/root"
 ENV PATH            "$ROOTSYS/bin:$ROOTSYS/bin/bin:$PATH"
 ENV LD_LIBRARY_PATH "$ROOTSYS/lib:$LD_LIBRARY_PATH"
+ENV DYLD_LIBRARY_PATH "$ROOTSYS/lib:$DYLD_LIBRARY_PATH"
 ENV PYTHONPATH      "$ROOTSYS/lib:PYTHONPATH"
 
-ADD https://root.cern.ch/download/root_v5.34.32.Linux-ubuntu14-x86_64-gcc4.8.tar.gz /var/tmp/root.tar.gz
+ADD https://root.cern.ch/download/root_v6.10.08.Linux-ubuntu16-x86_64-gcc5.4.tar.gz /var/tmp/root.tar.gz
 RUN tar xzf /var/tmp/root.tar.gz -C /opt && rm /var/tmp/root.tar.gz
 
 # Build pip deps
