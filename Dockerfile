@@ -48,8 +48,12 @@ ENV PYTHONPATH      "$ROOTSYS/lib:PYTHONPATH"
 ADD https://root.cern.ch/download/root_v5.34.32.Linux-ubuntu14-x86_64-gcc4.8.tar.gz /var/tmp/root.tar.gz
 RUN tar xzf /var/tmp/root.tar.gz -C /opt && rm /var/tmp/root.tar.gz
 
+RUN pip install --upgrade pip
+
+RUN conda remove scikit-learn matplotlib
+
 # Build pip deps
-RUN pip install --no-cache-dir \
+RUN pip install --upgrade --no-cache-dir \
         keras[h5py] \
         tensorflow \
         scikit-learn \
