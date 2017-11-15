@@ -45,19 +45,14 @@ ENV PATH            "$ROOTSYS/bin:$ROOTSYS/bin/bin:$PATH"
 ENV LD_LIBRARY_PATH "$ROOTSYS/lib:$LD_LIBRARY_PATH"
 ENV PYTHONPATH      "$ROOTSYS/lib:PYTHONPATH"
 
-# Install Keras.
-RUN pip install --no-cache-dir \
-        git+https://github.com/fchollet/keras
-
 ADD https://root.cern.ch/download/root_v5.34.32.Linux-ubuntu14-x86_64-gcc4.8.tar.gz /var/tmp/root.tar.gz
 RUN tar xzf /var/tmp/root.tar.gz -C /opt && rm /var/tmp/root.tar.gz
 
+# Build pip deps
 RUN pip install --no-cache-dir \
-        git+https://github.com/mickypaganini/YaleATLAS
-
-RUN pip install --no-cache-dir \
+        keras[h5py] \
+        tensorflow \
         scikit-learn \
-        h5py \
         pandas \
         matplotlib \
         root-numpy \
@@ -65,5 +60,9 @@ RUN pip install --no-cache-dir \
         tqdm \
         deepdish 
 
-ENV KERAS_BACKEND   "theano"
+# Build custom deps
+RUN pip install --no-cache-dir \
+        git+https://github.com/mickypaganini/YaleATLAS
+
+ENV KERAS_BACKEND   "tensorflow"
 
